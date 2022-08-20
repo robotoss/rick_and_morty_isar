@@ -6,14 +6,18 @@ part 'splash_event.dart';
 part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  SplashBloc(this._interactor) : super(SplashInitialState()) {
+  SplashBloc(this._interactor) : super(const SplashInitialState()) {
     on<SplashInitEvent>(_splashInitEvent);
   }
 
   final SplashInteractor _interactor;
 
   Future<void> _splashInitEvent(event, emit) async {
-    await _interactor.initApplication();
-    emit(SplashLoadedState());
+    try {
+      await _interactor.initApplication();
+      emit(const SplashLoadedState());
+    } catch (ex) {
+      emit(SplashFailureState(ex));
+    }
   }
 }

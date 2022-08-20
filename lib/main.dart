@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty_isar/app/navigator/go_navigation.dart';
 import 'package:rick_and_morty_isar/app/state/app_state.dart';
+import 'package:rick_and_morty_isar/core/api/api_service.dart';
+import 'package:rick_and_morty_isar/core/cache_manager/cache_manager.dart';
 
 void main() {
   runApp(
@@ -18,10 +20,19 @@ class AppRunner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, provider, child) {
+      final apiService = DioAppService();
       return MultiProvider(
         providers: [
           Provider(
-            create: (context) => GoNavigation(appState: provider),
+            create: (_) => GoNavigation(appState: provider),
+          ),
+          Provider<ApiService>(
+            create: (_) => apiService,
+          ),
+          Provider<CacheManager>(
+            create: (context) => IsarCacheManager(
+              apiService: apiService,
+            ),
           ),
         ],
         child: const MyApp(),
