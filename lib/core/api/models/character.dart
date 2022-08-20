@@ -10,13 +10,13 @@ class CharacterRequestModel {
   });
 
   final Info info;
-  final List<CharacterModel> results;
+  final List<Character> results;
 
   factory CharacterRequestModel.fromJson(Map<String, dynamic> json) =>
       CharacterRequestModel(
         info: Info.fromJson(json["info"]),
-        results: List<CharacterModel>.from(
-            json["results"].map((x) => CharacterModel.fromJson(x))),
+        results: List<Character>.from(
+            json["results"].map((x) => Character.fromJson(x))),
       );
 }
 
@@ -41,8 +41,8 @@ class Info {
       );
 }
 
-class CharacterModel {
-  CharacterModel({
+class Character {
+  Character({
     required this.id,
     required this.name,
     required this.status,
@@ -70,7 +70,7 @@ class CharacterModel {
   final String url;
   final DateTime created;
 
-  factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
+  factory Character.fromJson(Map<String, dynamic> json) => Character(
         id: json["id"],
         name: json["name"],
         status: json["status"],

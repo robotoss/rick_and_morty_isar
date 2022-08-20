@@ -7,7 +7,7 @@ part 'models/character.dart';
 abstract class ApiService {
   void init();
 
-  Future<List<CharacterModel>> getAllCharacters();
+  Future<List<Character>> getAllCharacters();
 }
 
 class DioAppService implements ApiService {
@@ -31,9 +31,9 @@ class DioAppService implements ApiService {
   }
 
   @override
-  Future<List<CharacterModel>> getAllCharacters() async {
+  Future<List<Character>> getAllCharacters() async {
     int page = 1;
-    final characters = <CharacterModel>[];
+    final characters = <Character>[];
 
     Future.doWhile(() async {
       final response = await _dio.get('?page=$page');
