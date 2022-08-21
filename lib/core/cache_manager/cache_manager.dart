@@ -61,9 +61,17 @@ class IsarCacheManager implements CacheManager {
         /// immediately show the cache data from the db.
         if (dbData == 0) {
           isNewData = true;
-          await _getCharactersData(dbConnection: _isar!);
+          try {
+            await _getCharactersData(dbConnection: _isar!);
+          } catch (ex) {
+            controller.addError(ex);
+            return;
+          }
         } else {
-          _getCharactersData(dbConnection: _isar!);
+          _getCharactersData(dbConnection: _isar!).onError((error, stackTrace) {
+            controller.addError(error!);
+            return;
+          });
         }
 
         _isar!.characterModels

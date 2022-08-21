@@ -35,12 +35,13 @@ class DioAppService implements ApiService {
     int page = 1;
     final characters = <Character>[];
 
-    Future.doWhile(() async {
-      final response = await _dio.get('?page=$page');
-      final responseChars = characterModelFromJson(response.data).results;
+    await Future.doWhile(() async {
+      final response = await _dio.get('character?page=$page');
+      final responseChars =
+          CharacterRequestModel.fromJson(response.data).results;
       characters.addAll(responseChars);
       page++;
-      return page == 30;
+      return page != 30;
     });
 
     return characters;
