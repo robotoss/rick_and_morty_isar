@@ -98,6 +98,7 @@ class IsarCacheManager implements CacheManager {
 
     await dbConnection.writeTxn(() async {
       for (final data in serverData) {
+        await Future.delayed(const Duration(milliseconds: 100)); // For test
         if (data.location.value != null) {
           dbConnection.locationModels.put(data.location.value!);
         }
