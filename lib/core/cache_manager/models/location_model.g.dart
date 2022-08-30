@@ -7,78 +7,72 @@ part of 'location_model.dart';
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, avoid_js_rounded_ints, prefer_final_locals
 
 extension GetLocationModelCollection on Isar {
-  IsarCollection<LocationModel> get locationModels => collection();
+  IsarCollection<LocationModel> get locationModels => this.collection();
 }
 
 const LocationModelSchema = CollectionSchema(
   name: r'LocationModel',
-  schema:
-      r'{"name":"LocationModel","idName":"id","properties":[{"name":"name","type":"String"},{"name":"url","type":"String"}],"indexes":[],"links":[]}',
-  idName: r'id',
-  propertyIds: {r'name': 0, r'url': 1},
-  listProperties: {},
-  indexIds: {},
-  indexValueTypes: {},
-  linkIds: {},
-  backlinkLinkNames: {},
-  getId: _locationModelGetId,
-  setId: _locationModelSetId,
-  getLinks: _locationModelGetLinks,
-  attachLinks: _locationModelAttachLinks,
+  id: 5574495368489612639,
+  properties: {
+    r'name': PropertySchema(
+      id: 0,
+      name: r'name',
+      type: IsarType.string,
+    ),
+    r'url': PropertySchema(
+      id: 1,
+      name: r'url',
+      type: IsarType.string,
+    )
+  },
+  estimateSize: _locationModelEstimateSize,
   serializeNative: _locationModelSerializeNative,
   deserializeNative: _locationModelDeserializeNative,
   deserializePropNative: _locationModelDeserializePropNative,
   serializeWeb: _locationModelSerializeWeb,
   deserializeWeb: _locationModelDeserializeWeb,
   deserializePropWeb: _locationModelDeserializePropWeb,
-  version: 4,
+  idName: r'id',
+  indexes: {},
+  links: {},
+  embeddedSchemas: {},
+  getId: _locationModelGetId,
+  getLinks: _locationModelGetLinks,
+  attach: _locationModelAttach,
+  version: '3.0.0-dev.13',
 );
 
-int? _locationModelGetId(LocationModel object) {
-  if (object.id == Isar.autoIncrement) {
-    return null;
-  } else {
-    return object.id;
-  }
+int _locationModelEstimateSize(
+  LocationModel object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  bytesCount += 3 + object.name.length * 3;
+  bytesCount += 3 + object.url.length * 3;
+  return bytesCount;
 }
 
-void _locationModelSetId(LocationModel object, int id) {
-  object.id = id;
-}
-
-List<IsarLinkBase<dynamic>> _locationModelGetLinks(LocationModel object) {
-  return [];
-}
-
-void _locationModelSerializeNative(
-    IsarCollection<LocationModel> collection,
-    IsarCObject cObj,
-    LocationModel object,
-    int staticSize,
-    List<int> offsets,
-    AdapterAlloc alloc) {
-  final name$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.name);
-  final url$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.url);
-  final size =
-      (staticSize + 3 + (name$Bytes.length) + 3 + (url$Bytes.length)) as int;
-  cObj.buffer = alloc(size);
-  cObj.buffer_length = size;
-
-  final buffer = IsarNative.bufAsBytes(cObj.buffer, size);
-  final writer = IsarBinaryWriter(buffer, staticSize);
-  writer.writeHeader();
-  writer.writeByteList(offsets[0], name$Bytes);
-  writer.writeByteList(offsets[1], url$Bytes);
+int _locationModelSerializeNative(
+  LocationModel object,
+  IsarBinaryWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeString(offsets[0], object.name);
+  writer.writeString(offsets[1], object.url);
+  return writer.usedBytes;
 }
 
 LocationModel _locationModelDeserializeNative(
-    IsarCollection<LocationModel> collection,
-    int id,
-    IsarBinaryReader reader,
-    List<int> offsets) {
+  Id id,
+  IsarBinaryReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   final object = LocationModel();
   object.id = id;
   object.name = reader.readString(offsets[0]);
@@ -87,52 +81,52 @@ LocationModel _locationModelDeserializeNative(
 }
 
 P _locationModelDeserializePropNative<P>(
-    int id, IsarBinaryReader reader, int propertyIndex, int offset) {
-  switch (propertyIndex) {
-    case -1:
-      return id as P;
+  IsarBinaryReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
     default:
-      throw IsarError('Illegal propertyIndex');
+      throw IsarError('Unknown property with id $propertyId');
   }
 }
 
 Object _locationModelSerializeWeb(
     IsarCollection<LocationModel> collection, LocationModel object) {
-  final jsObj = IsarNative.newJsObject();
-  IsarNative.jsObjectSet(jsObj, r'id', object.id);
-  IsarNative.jsObjectSet(jsObj, r'name', object.name);
-  IsarNative.jsObjectSet(jsObj, r'url', object.url);
-  return jsObj;
+  /*final jsObj = IsarNative.newJsObject();*/ throw UnimplementedError();
 }
 
 LocationModel _locationModelDeserializeWeb(
     IsarCollection<LocationModel> collection, Object jsObj) {
-  final object = LocationModel();
-  object.id = IsarNative.jsObjectGet(jsObj, r'id');
-  object.name = IsarNative.jsObjectGet(jsObj, r'name') ?? '';
-  object.url = IsarNative.jsObjectGet(jsObj, r'url') ?? '';
-  return object;
+  /*final object = LocationModel();object.id = IsarNative.jsObjectGet(jsObj, r'id') ;object.name = IsarNative.jsObjectGet(jsObj, r'name') ?? '';object.url = IsarNative.jsObjectGet(jsObj, r'url') ?? '';*/
+  //return object;
+  throw UnimplementedError();
 }
 
 P _locationModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
   switch (propertyName) {
-    case r'id':
-      return (IsarNative.jsObjectGet(jsObj, r'id')) as P;
-    case r'name':
-      return (IsarNative.jsObjectGet(jsObj, r'name') ?? '') as P;
-    case r'url':
-      return (IsarNative.jsObjectGet(jsObj, r'url') ?? '') as P;
     default:
       throw IsarError('Illegal propertyName');
   }
 }
 
-void _locationModelAttachLinks(
-    IsarCollection<dynamic> col, int id, LocationModel object) {}
+Id _locationModelGetId(LocationModel object) {
+  return object.id ?? Isar.autoIncrement;
+}
+
+List<IsarLinkBase<dynamic>> _locationModelGetLinks(LocationModel object) {
+  return [];
+}
+
+void _locationModelAttach(
+    IsarCollection<dynamic> col, Id id, LocationModel object) {
+  object.id = id;
+}
 
 extension LocationModelQueryWhereSort
     on QueryBuilder<LocationModel, LocationModel, QWhere> {
@@ -225,8 +219,17 @@ extension LocationModelQueryFilter
     });
   }
 
+  QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
+      idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> idEqualTo(
-      int value) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -237,7 +240,7 @@ extension LocationModelQueryFilter
 
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
       idGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -250,7 +253,7 @@ extension LocationModelQueryFilter
   }
 
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> idLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -263,8 +266,8 @@ extension LocationModelQueryFilter
   }
 
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -295,8 +298,8 @@ extension LocationModelQueryFilter
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
       nameGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -311,8 +314,8 @@ extension LocationModelQueryFilter
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
       nameLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -327,9 +330,9 @@ extension LocationModelQueryFilter
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> nameBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -394,6 +397,26 @@ extension LocationModelQueryFilter
     });
   }
 
+  QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
+      nameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
+      nameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> urlEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -410,8 +433,8 @@ extension LocationModelQueryFilter
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
       urlGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -425,8 +448,8 @@ extension LocationModelQueryFilter
 
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> urlLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -441,9 +464,9 @@ extension LocationModelQueryFilter
   QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition> urlBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -507,12 +530,35 @@ extension LocationModelQueryFilter
       ));
     });
   }
+
+  QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
+      urlIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'url',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationModel, LocationModel, QAfterFilterCondition>
+      urlIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'url',
+        value: '',
+      ));
+    });
+  }
 }
+
+extension LocationModelQueryObject
+    on QueryBuilder<LocationModel, LocationModel, QFilterCondition> {}
 
 extension LocationModelQueryLinks
     on QueryBuilder<LocationModel, LocationModel, QFilterCondition> {}
 
-extension LocationModelQueryWhereSortBy
+extension LocationModelQuerySortBy
     on QueryBuilder<LocationModel, LocationModel, QSortBy> {
   QueryBuilder<LocationModel, LocationModel, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
@@ -539,7 +585,7 @@ extension LocationModelQueryWhereSortBy
   }
 }
 
-extension LocationModelQueryWhereSortThenBy
+extension LocationModelQuerySortThenBy
     on QueryBuilder<LocationModel, LocationModel, QSortThenBy> {
   QueryBuilder<LocationModel, LocationModel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {

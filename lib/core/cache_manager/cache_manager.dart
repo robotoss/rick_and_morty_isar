@@ -31,15 +31,30 @@ class IsarCacheManager implements CacheManager {
     /// First we try to find an already open instance.
     _isar = Isar.getInstance(dbName);
 
-    /// If an open instance could not be found, then open a new instance.
-    _isar ??= await Isar.open(
-      [
-        CharacterModelSchema,
-        LocationModelSchema,
-      ],
-      name: dbName,
-      directory: directory.path,
-    );
+    int count = 0;
+
+    await Future.doWhile(() async {
+      try {
+        print('Try start Isar - count $count');
+
+        /// If an open instance could not be found, then open a new instance.
+        _isar ??= await Isar.open(
+          [
+            CharacterModelSchema,
+            LocationModelSchema,
+          ],
+          name: dbName,
+          directory: directory.path,
+        );
+
+        return false;
+      } catch (ex, stackTrace) {
+        await Future.delayed(const Duration(milliseconds: 500));
+        count++;
+        print('Failed start Isar');
+        return count != 25;
+      }
+    });
   }
 
   @override

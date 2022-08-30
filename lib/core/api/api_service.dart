@@ -22,12 +22,12 @@ class DioAppService implements ApiService {
 
   @override
   void init() {
-    _dio.interceptors.add(
-      LogInterceptor(
-        responseBody: true,
-        requestBody: true,
-      ),
-    );
+    // _dio.interceptors.add(
+    //   LogInterceptor(
+    //     responseBody: true,
+    //     requestBody: true,
+    //   ),
+    // );
   }
 
   @override

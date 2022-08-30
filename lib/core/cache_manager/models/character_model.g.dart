@@ -7,121 +7,139 @@ part of 'character_model.dart';
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, avoid_js_rounded_ints, prefer_final_locals
 
 extension GetCharacterModelCollection on Isar {
-  IsarCollection<CharacterModel> get characterModels => collection();
+  IsarCollection<CharacterModel> get characterModels => this.collection();
 }
 
 const CharacterModelSchema = CollectionSchema(
   name: r'CharacterModel',
-  schema:
-      r'{"name":"CharacterModel","idName":"id","properties":[{"name":"created","type":"Long"},{"name":"episode","type":"StringList"},{"name":"gender","type":"String"},{"name":"image","type":"String"},{"name":"name","type":"String"},{"name":"species","type":"String"},{"name":"status","type":"String"},{"name":"type","type":"String"},{"name":"url","type":"String"}],"indexes":[],"links":[{"name":"location","target":"LocationModel"},{"name":"origin","target":"LocationModel"}]}',
-  idName: r'id',
-  propertyIds: {
-    r'created': 0,
-    r'episode': 1,
-    r'gender': 2,
-    r'image': 3,
-    r'name': 4,
-    r'species': 5,
-    r'status': 6,
-    r'type': 7,
-    r'url': 8
+  id: -9024648705629459631,
+  properties: {
+    r'created': PropertySchema(
+      id: 0,
+      name: r'created',
+      type: IsarType.dateTime,
+    ),
+    r'episode': PropertySchema(
+      id: 1,
+      name: r'episode',
+      type: IsarType.stringList,
+    ),
+    r'gender': PropertySchema(
+      id: 2,
+      name: r'gender',
+      type: IsarType.string,
+    ),
+    r'image': PropertySchema(
+      id: 3,
+      name: r'image',
+      type: IsarType.string,
+    ),
+    r'name': PropertySchema(
+      id: 4,
+      name: r'name',
+      type: IsarType.string,
+    ),
+    r'species': PropertySchema(
+      id: 5,
+      name: r'species',
+      type: IsarType.string,
+    ),
+    r'status': PropertySchema(
+      id: 6,
+      name: r'status',
+      type: IsarType.string,
+    ),
+    r'type': PropertySchema(
+      id: 7,
+      name: r'type',
+      type: IsarType.string,
+    ),
+    r'url': PropertySchema(
+      id: 8,
+      name: r'url',
+      type: IsarType.string,
+    )
   },
-  listProperties: {r'episode'},
-  indexIds: {},
-  indexValueTypes: {},
-  linkIds: {r'location': 0, r'origin': 1},
-  backlinkLinkNames: {},
-  getId: _characterModelGetId,
-  setId: _characterModelSetId,
-  getLinks: _characterModelGetLinks,
-  attachLinks: _characterModelAttachLinks,
+  estimateSize: _characterModelEstimateSize,
   serializeNative: _characterModelSerializeNative,
   deserializeNative: _characterModelDeserializeNative,
   deserializePropNative: _characterModelDeserializePropNative,
   serializeWeb: _characterModelSerializeWeb,
   deserializeWeb: _characterModelDeserializeWeb,
   deserializePropWeb: _characterModelDeserializePropWeb,
-  version: 4,
+  idName: r'id',
+  indexes: {},
+  links: {
+    r'origin': LinkSchema(
+      id: 3163685803361720848,
+      name: r'origin',
+      target: r'LocationModel',
+      isSingle: true,
+    ),
+    r'location': LinkSchema(
+      id: 578105209912874676,
+      name: r'location',
+      target: r'LocationModel',
+      isSingle: true,
+    )
+  },
+  embeddedSchemas: {},
+  getId: _characterModelGetId,
+  getLinks: _characterModelGetLinks,
+  attach: _characterModelAttach,
+  version: '3.0.0-dev.13',
 );
 
-int? _characterModelGetId(CharacterModel object) {
-  if (object.id == Isar.autoIncrement) {
-    return null;
-  } else {
-    return object.id;
+int _characterModelEstimateSize(
+  CharacterModel object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  bytesCount += 3 + object.episode.length * 3;
+  {
+    for (var i = 0; i < object.episode.length; i++) {
+      final value = object.episode[i];
+      bytesCount += value.length * 3;
+    }
   }
+  bytesCount += 3 + object.gender.length * 3;
+  bytesCount += 3 + object.image.length * 3;
+  bytesCount += 3 + object.name.length * 3;
+  bytesCount += 3 + object.species.length * 3;
+  bytesCount += 3 + object.status.length * 3;
+  bytesCount += 3 + object.type.length * 3;
+  bytesCount += 3 + object.url.length * 3;
+  return bytesCount;
 }
 
-void _characterModelSetId(CharacterModel object, int id) {
-  object.id = id;
-}
-
-List<IsarLinkBase<dynamic>> _characterModelGetLinks(CharacterModel object) {
-  return [object.location, object.origin];
-}
-
-void _characterModelSerializeNative(
-    IsarCollection<CharacterModel> collection,
-    IsarCObject cObj,
-    CharacterModel object,
-    int staticSize,
-    List<int> offsets,
-    AdapterAlloc alloc) {
-  var episode$BytesCount = 3 + (object.episode.length) * 3;
-  final episode$BytesList = <IsarUint8List>[];
-  for (final str in object.episode) {
-    final bytes = IsarBinaryWriter.utf8Encoder.convert(str);
-    episode$BytesList.add(bytes);
-    episode$BytesCount += bytes.length as int;
-  }
-  final gender$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.gender);
-  final image$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.image);
-  final name$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.name);
-  final species$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.species);
-  final status$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.status);
-  final type$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.type);
-  final url$Bytes = IsarBinaryWriter.utf8Encoder.convert(object.url);
-  final size = (staticSize +
-      episode$BytesCount +
-      3 +
-      (gender$Bytes.length) +
-      3 +
-      (image$Bytes.length) +
-      3 +
-      (name$Bytes.length) +
-      3 +
-      (species$Bytes.length) +
-      3 +
-      (status$Bytes.length) +
-      3 +
-      (type$Bytes.length) +
-      3 +
-      (url$Bytes.length)) as int;
-  cObj.buffer = alloc(size);
-  cObj.buffer_length = size;
-
-  final buffer = IsarNative.bufAsBytes(cObj.buffer, size);
-  final writer = IsarBinaryWriter(buffer, staticSize);
-  writer.writeHeader();
+int _characterModelSerializeNative(
+  CharacterModel object,
+  IsarBinaryWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   writer.writeDateTime(offsets[0], object.created);
-  writer.writeByteLists(offsets[1], episode$BytesList);
-  writer.writeByteList(offsets[2], gender$Bytes);
-  writer.writeByteList(offsets[3], image$Bytes);
-  writer.writeByteList(offsets[4], name$Bytes);
-  writer.writeByteList(offsets[5], species$Bytes);
-  writer.writeByteList(offsets[6], status$Bytes);
-  writer.writeByteList(offsets[7], type$Bytes);
-  writer.writeByteList(offsets[8], url$Bytes);
+  writer.writeStringList(offsets[1], object.episode);
+  writer.writeString(offsets[2], object.gender);
+  writer.writeString(offsets[3], object.image);
+  writer.writeString(offsets[4], object.name);
+  writer.writeString(offsets[5], object.species);
+  writer.writeString(offsets[6], object.status);
+  writer.writeString(offsets[7], object.type);
+  writer.writeString(offsets[8], object.url);
+  return writer.usedBytes;
 }
 
 CharacterModel _characterModelDeserializeNative(
-    IsarCollection<CharacterModel> collection,
-    int id,
-    IsarBinaryReader reader,
-    List<int> offsets) {
+  Id id,
+  IsarBinaryReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   final object = CharacterModel();
   object.created = reader.readDateTime(offsets[0]);
   object.episode = reader.readStringList(offsets[1]) ?? [];
@@ -133,15 +151,16 @@ CharacterModel _characterModelDeserializeNative(
   object.status = reader.readString(offsets[6]);
   object.type = reader.readString(offsets[7]);
   object.url = reader.readString(offsets[8]);
-  _characterModelAttachLinks(collection, id, object);
   return object;
 }
 
 P _characterModelDeserializePropNative<P>(
-    int id, IsarBinaryReader reader, int propertyIndex, int offset) {
-  switch (propertyIndex) {
-    case -1:
-      return id as P;
+  IsarBinaryReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
     case 0:
       return (reader.readDateTime(offset)) as P;
     case 1:
@@ -161,94 +180,44 @@ P _characterModelDeserializePropNative<P>(
     case 8:
       return (reader.readString(offset)) as P;
     default:
-      throw IsarError('Illegal propertyIndex');
+      throw IsarError('Unknown property with id $propertyId');
   }
 }
 
 Object _characterModelSerializeWeb(
     IsarCollection<CharacterModel> collection, CharacterModel object) {
-  final jsObj = IsarNative.newJsObject();
-  IsarNative.jsObjectSet(
-      jsObj, r'created', object.created.toUtc().millisecondsSinceEpoch);
-  IsarNative.jsObjectSet(jsObj, r'episode', object.episode);
-  IsarNative.jsObjectSet(jsObj, r'gender', object.gender);
-  IsarNative.jsObjectSet(jsObj, r'id', object.id);
-  IsarNative.jsObjectSet(jsObj, r'image', object.image);
-  IsarNative.jsObjectSet(jsObj, r'name', object.name);
-  IsarNative.jsObjectSet(jsObj, r'species', object.species);
-  IsarNative.jsObjectSet(jsObj, r'status', object.status);
-  IsarNative.jsObjectSet(jsObj, r'type', object.type);
-  IsarNative.jsObjectSet(jsObj, r'url', object.url);
-  return jsObj;
+  /*final jsObj = IsarNative.newJsObject();*/ throw UnimplementedError();
 }
 
 CharacterModel _characterModelDeserializeWeb(
     IsarCollection<CharacterModel> collection, Object jsObj) {
-  final object = CharacterModel();
-  object.created = IsarNative.jsObjectGet(jsObj, r'created') != null
-      ? DateTime.fromMillisecondsSinceEpoch(
-              IsarNative.jsObjectGet(jsObj, r'created') as int,
-              isUtc: true)
-          .toLocal()
-      : DateTime.fromMillisecondsSinceEpoch(0);
-  object.episode = (IsarNative.jsObjectGet(jsObj, r'episode') as List?)
-          ?.map((e) => e ?? '')
-          .toList()
-          .cast<String>() ??
-      [];
-  object.gender = IsarNative.jsObjectGet(jsObj, r'gender') ?? '';
-  object.id = IsarNative.jsObjectGet(jsObj, r'id');
-  object.image = IsarNative.jsObjectGet(jsObj, r'image') ?? '';
-  object.name = IsarNative.jsObjectGet(jsObj, r'name') ?? '';
-  object.species = IsarNative.jsObjectGet(jsObj, r'species') ?? '';
-  object.status = IsarNative.jsObjectGet(jsObj, r'status') ?? '';
-  object.type = IsarNative.jsObjectGet(jsObj, r'type') ?? '';
-  object.url = IsarNative.jsObjectGet(jsObj, r'url') ?? '';
-  _characterModelAttachLinks(
-      collection, IsarNative.jsObjectGet(jsObj, r'id'), object);
-  return object;
+  /*final object = CharacterModel();object.created = IsarNative.jsObjectGet(jsObj, r'created') != null ? DateTime.fromMillisecondsSinceEpoch(IsarNative.jsObjectGet(jsObj, r'created') as int, isUtc: true).toLocal() : DateTime.fromMillisecondsSinceEpoch(0);object.episode = (IsarNative.jsObjectGet(jsObj, r'episode') as List?)?.map((e) => e ?? '').toList().cast<String>() ?? [];object.gender = IsarNative.jsObjectGet(jsObj, r'gender') ?? '';object.id = IsarNative.jsObjectGet(jsObj, r'id') ;object.image = IsarNative.jsObjectGet(jsObj, r'image') ?? '';object.name = IsarNative.jsObjectGet(jsObj, r'name') ?? '';object.species = IsarNative.jsObjectGet(jsObj, r'species') ?? '';object.status = IsarNative.jsObjectGet(jsObj, r'status') ?? '';object.type = IsarNative.jsObjectGet(jsObj, r'type') ?? '';object.url = IsarNative.jsObjectGet(jsObj, r'url') ?? '';*/
+  //return object;
+  throw UnimplementedError();
 }
 
 P _characterModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
   switch (propertyName) {
-    case r'created':
-      return (IsarNative.jsObjectGet(jsObj, r'created') != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-                  IsarNative.jsObjectGet(jsObj, r'created') as int,
-                  isUtc: true)
-              .toLocal()
-          : DateTime.fromMillisecondsSinceEpoch(0)) as P;
-    case r'episode':
-      return ((IsarNative.jsObjectGet(jsObj, r'episode') as List?)
-              ?.map((e) => e ?? '')
-              .toList()
-              .cast<String>() ??
-          []) as P;
-    case r'gender':
-      return (IsarNative.jsObjectGet(jsObj, r'gender') ?? '') as P;
-    case r'id':
-      return (IsarNative.jsObjectGet(jsObj, r'id')) as P;
-    case r'image':
-      return (IsarNative.jsObjectGet(jsObj, r'image') ?? '') as P;
-    case r'name':
-      return (IsarNative.jsObjectGet(jsObj, r'name') ?? '') as P;
-    case r'species':
-      return (IsarNative.jsObjectGet(jsObj, r'species') ?? '') as P;
-    case r'status':
-      return (IsarNative.jsObjectGet(jsObj, r'status') ?? '') as P;
-    case r'type':
-      return (IsarNative.jsObjectGet(jsObj, r'type') ?? '') as P;
-    case r'url':
-      return (IsarNative.jsObjectGet(jsObj, r'url') ?? '') as P;
     default:
       throw IsarError('Illegal propertyName');
   }
 }
 
-void _characterModelAttachLinks(
-    IsarCollection<dynamic> col, int id, CharacterModel object) {
-  object.location.attach(col, col.isar.locationModels, r'location', id);
-  object.origin.attach(col, col.isar.locationModels, r'origin', id);
+Id _characterModelGetId(CharacterModel object) {
+  return object.id ?? Isar.autoIncrement;
+}
+
+List<IsarLinkBase<dynamic>> _characterModelGetLinks(CharacterModel object) {
+  return [object.origin, object.location];
+}
+
+void _characterModelAttach(
+    IsarCollection<dynamic> col, Id id, CharacterModel object) {
+  object.id = id;
+  object.origin
+      .attach(col, col.isar.collection<LocationModel>(), r'origin', id);
+  object.location
+      .attach(col, col.isar.collection<LocationModel>(), r'location', id);
 }
 
 extension CharacterModelQueryWhereSort
@@ -407,8 +376,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       episodeElementGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -423,8 +392,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       episodeElementLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -440,9 +409,9 @@ extension CharacterModelQueryFilter
       episodeElementBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -507,6 +476,115 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'episode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'episode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      episodeLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'episode',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       genderEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -523,8 +601,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       genderGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -539,8 +617,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       genderLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -556,9 +634,9 @@ extension CharacterModelQueryFilter
       genderBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -623,6 +701,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      genderIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'gender',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      genderIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'gender',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -631,8 +729,17 @@ extension CharacterModelQueryFilter
     });
   }
 
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition> idEqualTo(
-      int value) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -643,7 +750,7 @@ extension CharacterModelQueryFilter
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       idGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -657,7 +764,7 @@ extension CharacterModelQueryFilter
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       idLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -670,8 +777,8 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -703,8 +810,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       imageGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -719,8 +826,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       imageLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -736,9 +843,9 @@ extension CharacterModelQueryFilter
       imageBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -803,6 +910,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      imageIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'image',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      imageIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'image',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       nameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -819,8 +946,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       nameGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -835,8 +962,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       nameLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -852,9 +979,9 @@ extension CharacterModelQueryFilter
       nameBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -919,6 +1046,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      nameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      nameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       speciesEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -935,8 +1082,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       speciesGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -951,8 +1098,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       speciesLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -968,9 +1115,9 @@ extension CharacterModelQueryFilter
       speciesBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1035,6 +1182,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      speciesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'species',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      speciesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'species',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       statusEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1051,8 +1218,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       statusGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1067,8 +1234,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       statusLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -1084,9 +1251,9 @@ extension CharacterModelQueryFilter
       statusBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1151,6 +1318,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      statusIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      statusIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       typeEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1167,8 +1354,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       typeGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1183,8 +1370,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       typeLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -1200,9 +1387,9 @@ extension CharacterModelQueryFilter
       typeBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1267,6 +1454,26 @@ extension CharacterModelQueryFilter
   }
 
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      typeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'type',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      typeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'type',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       urlEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1283,8 +1490,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       urlGreaterThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1299,8 +1506,8 @@ extension CharacterModelQueryFilter
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
       urlLessThan(
     String value, {
-    bool caseSensitive = true,
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
@@ -1316,9 +1523,9 @@ extension CharacterModelQueryFilter
       urlBetween(
     String lower,
     String upper, {
-    bool caseSensitive = true,
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -1381,34 +1588,63 @@ extension CharacterModelQueryFilter
       ));
     });
   }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      urlIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'url',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      urlIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'url',
+        value: '',
+      ));
+    });
+  }
 }
+
+extension CharacterModelQueryObject
+    on QueryBuilder<CharacterModel, CharacterModel, QFilterCondition> {}
 
 extension CharacterModelQueryLinks
     on QueryBuilder<CharacterModel, CharacterModel, QFilterCondition> {
-  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition> location(
-      FilterQuery<LocationModel> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.link(
-        query.collection.isar.locationModels,
-        q,
-        r'location',
-      );
-    });
-  }
-
   QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition> origin(
       FilterQuery<LocationModel> q) {
     return QueryBuilder.apply(this, (query) {
-      return query.link(
-        query.collection.isar.locationModels,
-        q,
-        r'origin',
-      );
+      return query.link(q, r'origin');
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      originIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'origin', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition> location(
+      FilterQuery<LocationModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'location');
+    });
+  }
+
+  QueryBuilder<CharacterModel, CharacterModel, QAfterFilterCondition>
+      locationIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'location', 0, true, 0, true);
     });
   }
 }
 
-extension CharacterModelQueryWhereSortBy
+extension CharacterModelQuerySortBy
     on QueryBuilder<CharacterModel, CharacterModel, QSortBy> {
   QueryBuilder<CharacterModel, CharacterModel, QAfterSortBy> sortByCreated() {
     return QueryBuilder.apply(this, (query) {
@@ -1511,7 +1747,7 @@ extension CharacterModelQueryWhereSortBy
   }
 }
 
-extension CharacterModelQueryWhereSortThenBy
+extension CharacterModelQuerySortThenBy
     on QueryBuilder<CharacterModel, CharacterModel, QSortThenBy> {
   QueryBuilder<CharacterModel, CharacterModel, QAfterSortBy> thenByCreated() {
     return QueryBuilder.apply(this, (query) {
